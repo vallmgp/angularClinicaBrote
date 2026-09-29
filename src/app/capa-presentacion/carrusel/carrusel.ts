@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, PLATFORM_ID, ViewChild, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 // Bootstrap se carga como script global desde angular.json
 declare const bootstrap: any;
@@ -31,6 +32,9 @@ interface Promocion {
 })
 export class Carrusel implements AfterViewInit {
   @ViewChild('carrusel') carrusel!: ElementRef<HTMLElement>;
+
+  // Nos dice si estamos corriendo en el navegador o en el servidor (SSR)
+  private readonly esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
 
   readonly promociones: Promocion[] = [
     {
@@ -87,7 +91,12 @@ export class Carrusel implements AfterViewInit {
 
   // Angular dibuja el carrusel después de que Bootstrap busca los
   // carruseles de la página, así que lo arrancamos nosotros aquí.
+  // Solo lo hacemos en el navegador: en el servidor (SSR) no existe
+  // el script de Bootstrap ni la variable "bootstrap".
   ngAfterViewInit(): void {
+    if (!this.esNavegador) {
+      return;
+    }
     bootstrap.Carousel.getOrCreateInstance(this.carrusel.nativeElement, {
       interval: 6500,
       ride: 'carousel',
