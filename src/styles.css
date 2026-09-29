@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   Estilos globales de Clínica Brote
+   Aquí van los colores de marca y lo que usan varios componentes.
+   Los estilos de cada sección están en el .css de su componente.
+   ============================================================ */
+
+:root{
+  --verde-05:#F4FAF3;
+  --verde-10:#E3F1E2;
+  --verde-20:#CDE7CC;
+  --verde-oscuro:#3d694a;
+  --verde-oscuro-2:#27472d;
+  --rosa-10:#FBE7EE;
+  --rosa-20:#F5C9DA;
+  --rosa-30:#EDA9C2;
+  --crema:#FDFCF9;
+  --texto:#213024;
+
+  /* Tonos del carrusel y la bienvenida: rosa pastel y verde sage,
+     un poco más profundos para que se lean bien sobre fondo claro */
+  --promo-rosa:#AE6484;          /* textos en Ubuntu */
+  --promo-rosa-suave:#C07894;    /* antetítulo */
+  --promo-sage:#6B8A63;          /* títulos en Parisienne */
+  --promo-sage-profundo:#5F7F58; /* palabras resaltadas */
+
+  --bs-primary: var(--verde-oscuro);
+  --bs-primary-rgb: 46,83,57;
+  --bs-secondary: var(--rosa-30);
+  --bs-secondary-rgb: 237,169,194;
+  --bs-body-bg: var(--crema);
+  --bs-body-color: var(--texto);
+  --bs-body-font-family: 'Manrope', sans-serif;
+  --bs-border-radius: .8rem;
+  --bs-border-radius-lg: 1.2rem;
+}
+
+html{ scroll-behavior:smooth; }
+body{ color:var(--texto); }
+
+h1,h2,h3,h4,.font-display{
+  font-family:'Manrope', sans-serif;
+  font-weight:600;
+  color:var(--verde-oscuro-2);
+  letter-spacing:-.01em;
+}
+
+a{ color:var(--verde-oscuro); }
+
+:focus-visible{
+  outline:3px solid var(--rosa-30);
+  outline-offset:2px;
+}
+
+/* ---------- utilidades de marca ---------- */
+.bg-verde-05{ background:var(--verde-05); }
+.bg-verde-10{ background:var(--verde-10); }
+.bg-verde-oscuro{ background:var(--verde-oscuro); }
+.bg-rosa-10{ background:var(--rosa-10); }
+.text-verde-oscuro{ color:var(--verde-oscuro-2); }
+.text-rosa{ color:#B75C82; }
+
+.eyebrow{
+  font-weight:700;
+  font-size:.78rem;
+  color:#3E7A54;
+}
+
+/* ---------- botón pastilla sage (carrusel y bienvenida) ---------- */
+.btn-promo{
+  font-family:'Ubuntu', sans-serif;
+  font-weight:500;
+  letter-spacing:.03em;
+  color:var(--promo-sage-profundo);
+  background:rgba(255,255,255,.55);
+  border:1.5px solid var(--promo-sage);
+  border-radius:999px;
+  padding:.6rem 1.6rem;
+  transition:background .2s ease, color .2s ease;
+}
+.btn-promo:hover,
+.btn-promo:focus-visible{
+  background:var(--promo-sage);
+  border-color:var(--promo-sage);
+  color:#fff;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+}

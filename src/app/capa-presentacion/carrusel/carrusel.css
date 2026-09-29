@@ -1,0 +1,220 @@
+.promo-section{
+  position:relative;
+  background:var(--crema);
+}
+
+.promo-section .carousel-item{
+  position:relative;
+  min-height:560px;
+  overflow:hidden;
+}
+
+/* Foto de fondo de cada promoción (la imagen se pone desde el HTML) */
+.promo-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+.promo-valoracion{
+  /* un poco más grande que el ancho para esconder el marco blanco
+     que trae la foto en los bordes */
+  background-size:106% auto;
+  background-position:center 58%;
+}
+.promo-bienestar{
+  background-position:center 62%;
+}
+.promo-neural{
+  background-position:center 55%;
+}
+
+/* Capa blanca transparente: más densa del lado del texto
+   y más ligera hacia la derecha, para que la foto respire. */
+.promo-velo{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,.90) 0%,
+    rgba(255,255,255,.80) 38%,
+    rgba(255,255,255,.52) 70%,
+    rgba(255,255,255,.38) 100%);
+}
+
+/* Texto encima de la foto */
+.promo-contenido{
+  position:relative;
+  z-index:2;
+  min-height:560px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:4rem;
+  padding-bottom:4.5rem;
+}
+.promo-contenido > *{
+  max-width:34rem;
+}
+.promo-antetitulo{
+  font-family:'Ubuntu', sans-serif;
+  font-weight:400;
+  font-size:1.05rem;
+  letter-spacing:.06em;
+  color:var(--promo-rosa-suave);
+  margin-bottom:.25rem;
+}
+.promo-titulo{
+  font-family:'Parisienne', cursive;
+  font-weight:400;
+  font-size:clamp(3.2rem, 7vw, 5.4rem);
+  line-height:1.05;
+  letter-spacing:0;
+  color:var(--promo-sage);
+  margin:0 0 1rem -.1em;
+}
+.promo-contenido > .promo-titulo{
+  max-width:none;   /* el título va en una sola línea en escritorio */
+}
+.promo-texto{
+  font-family:'Ubuntu', sans-serif;
+  font-weight:300;
+  font-size:1.2rem;
+  line-height:1.6;
+  color:var(--promo-rosa);
+  margin-bottom:1.75rem;
+}
+.promo-resalta{
+  font-family:'Parisienne', cursive;
+  font-size:1.55em;
+  line-height:1;
+  color:var(--promo-sage-profundo);
+  white-space:nowrap;
+}
+
+/* Indicadores y flechas en rosa */
+.promo-section .carousel-indicators{
+  margin-bottom:1.5rem;
+  z-index:3;
+}
+.promo-section .carousel-indicators [data-bs-target]{
+  background-color:var(--promo-rosa);
+  width:9px; height:9px;
+  border-radius:50%;
+  border:0;
+  opacity:.35;
+}
+.promo-section .carousel-indicators .active{
+  opacity:1;
+}
+.promo-section .carousel-control-prev,
+.promo-section .carousel-control-next{
+  width:6%;
+  z-index:3;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon{
+  background-color:rgba(237,169,194,.85);
+  border-radius:50%;
+  padding:1.2rem;
+  background-size:50% 50%;
+}
+
+/* ============================================================
+   Animación de los textos al cambiar de promoción
+   --dir vale 1 al avanzar (los textos salen hacia la izquierda y
+   entran por la derecha) y -1 al retroceder (al revés).
+   ============================================================ */
+/* La foto nueva empieza a aparecer un poquito después, para que
+   alcance a verse cómo sale el texto de la promoción anterior */
+.carousel-fade .carousel-item.carousel-item-next.carousel-item-start,
+.carousel-fade .carousel-item.carousel-item-prev.carousel-item-end{
+  transition:opacity .7s ease-in-out .2s;
+}
+
+.promo-contenido{ --dir:1; }
+.promo-contenido.hacia-atras{ --dir:-1; }
+
+/* ---- Entrada: aparecen uno tras otro ---- */
+.promo-contenido.texto-entra > *{
+  animation:texto-entra .8s cubic-bezier(.2,.7,.2,1) both;
+}
+.promo-contenido.texto-entra > .promo-antetitulo{ animation-delay:.3s; }
+.promo-contenido.texto-entra > .promo-texto{ animation-delay:.8s; }
+.promo-contenido.texto-entra > .btn-promo{ animation-delay:1s; }
+
+/* El título en Parisienne se "escribe" de izquierda a derecha */
+.promo-contenido.texto-entra > .promo-titulo{
+  animation:titulo-escribe 1.3s cubic-bezier(.3,.6,.25,1) .45s both;
+}
+
+/* La palabra resaltada brota con un pequeño salto */
+.promo-contenido.texto-entra .promo-resalta{
+  display:inline-block;
+  animation:resalta-brota .7s cubic-bezier(.3,1.5,.5,1) 1.15s both;
+}
+
+/* ---- Salida: se deslizan y se desvanecen ---- */
+.promo-contenido.texto-sale > *{
+  animation:texto-sale .45s cubic-bezier(.5,0,.75,0) both;
+}
+.promo-contenido.texto-sale > :nth-child(2){ animation-delay:.04s; }
+.promo-contenido.texto-sale > :nth-child(3){ animation-delay:.08s; }
+.promo-contenido.texto-sale > :nth-child(4){ animation-delay:.12s; }
+
+@keyframes texto-entra{
+  from{ opacity:0; transform:translateX(calc(var(--dir) * 36px)); }
+  to{   opacity:1; transform:none; }
+}
+@keyframes titulo-escribe{
+  from{ opacity:0; clip-path:inset(-30% 100% -30% -10%); transform:translateX(calc(var(--dir) * 16px)); }
+  25%{  opacity:1; }
+  to{   opacity:1; clip-path:inset(-30% -10% -30% -10%); transform:none; }
+}
+@keyframes resalta-brota{
+  from{ opacity:0; transform:translateY(10px) scale(.85); }
+  to{   opacity:1; transform:none; }
+}
+@keyframes texto-sale{
+  from{ opacity:1; transform:none; }
+  to{   opacity:0; transform:translateX(calc(var(--dir) * -44px)); }
+}
+
+/* Quien prefiere menos movimiento (ajuste del sistema) ve el texto sin animación */
+@media (prefers-reduced-motion: reduce){
+  .promo-contenido.texto-entra > *,
+  .promo-contenido.texto-entra .promo-resalta,
+  .promo-contenido.texto-sale > *{
+    animation:none;
+  }
+}
+
+/* En celular la capa se vuelve pareja y el texto se centra */
+@media (max-width: 767.98px){
+  .promo-section .carousel-item,
+  .promo-contenido{
+    min-height:480px;
+  }
+  .promo-velo{
+    background:rgba(255,255,255,.80);
+  }
+  .promo-contenido{
+    align-items:center;
+    text-align:center;
+    padding-left:3.5rem;
+    padding-right:3.5rem;
+  }
+  /* En pantallas angostas se acerca la foto para que no se vean
+     las esquinas de la captura (botones de Pinterest) */
+  .promo-valoracion{
+    background-size:170% auto;
+    background-position:center 50%;
+  }
+  .promo-texto{ font-size:1.08rem; }
+  .promo-section .carousel-control-prev,
+  .promo-section .carousel-control-next{
+    width:12%;
+  }
+  .carousel-control-prev-icon, .carousel-control-next-icon{
+    padding:1rem;
+  }
+}

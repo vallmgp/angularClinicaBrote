@@ -1,0 +1,15 @@
+.navbar-brote{
+  background:var(--verde-oscuro);
+}
+.navbar-brote .nav-link{
+  color:#DDEEDC;
+  font-weight:600;
+  font-size:.94rem;
+}
+.navbar-brote .nav-link:hover,
+.navbar-brote .nav-link.active{
+  color:var(--rosa-20);
+}
+.navbar-brote .navbar-toggler{
+  border-color:rgba(255,255,255,.35);
+}

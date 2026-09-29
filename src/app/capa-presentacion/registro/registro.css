@@ -1,0 +1,58 @@
+/* ---------- formulario registro ---------- */
+.registro-panel{
+  background:var(--rosa-10);
+}
+.registro-card{
+  background:var(--crema);
+  border-radius:1.2rem;
+  border:1px solid var(--rosa-20);
+}
+.form-control:focus, .form-select:focus{
+  border-color:var(--verde-oscuro);
+  box-shadow:0 0 0 .2rem rgba(46,83,57,.15);
+}
+.form-check-input:checked{
+  background-color:var(--verde-oscuro);
+  border-color:var(--verde-oscuro);
+}
+
+/* ---------- mensaje de bienvenida ---------- */
+.bienvenida-contenido{
+  background:var(--crema);
+  border:1px solid var(--rosa-20);
+  border-radius:1.4rem;
+  box-shadow:0 24px 48px -24px rgba(46,83,57,.35);
+}
+.bienvenida-contenido .modal-body{
+  padding:2.5rem 2rem 2.25rem;
+}
+.bienvenida-icono{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:56px; height:56px;
+  border-radius:60% 40% 55% 45% / 55% 45% 55% 45%;
+  background:var(--rosa-10);
+  color:var(--promo-rosa);
+  font-size:1.6rem;
+  margin-bottom:.75rem;
+}
+.bienvenida-titulo{
+  font-family:'Parisienne', cursive;
+  font-weight:400;
+  font-size:clamp(2.3rem, 7vw, 3rem);
+  line-height:1.15;
+  letter-spacing:0;
+  color:var(--promo-sage);
+  margin-bottom:.75rem;
+}
+.bienvenida-texto{
+  font-family:'Ubuntu', sans-serif;
+  font-weight:300;
+  font-size:1.05rem;
+  line-height:1.6;
+  color:var(--promo-rosa);
+  margin:0 auto 1.5rem;
+  max-width:24rem;
+}
+.bienvenida-texto strong{
+  font-weight:500;
+}

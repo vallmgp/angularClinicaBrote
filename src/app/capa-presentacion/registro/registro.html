@@ -1,0 +1,132 @@
+<section id="registro" class="registro-panel py-5">
+  <div class="container py-4">
+    <div class="registro-card mx-auto p-4 p-md-5" style="max-width:700px;">
+      <p class="eyebrow text-uppercase text-center mb-1">Nuevos usuarios</p>
+      <h2 class="text-center mb-2">Regístrate en Clínica Brote</h2>
+      <p class="lead text-center mb-4">
+        Tu correo electrónico será el dato que confirme tu registro: te enviaremos un enlace de verificación a esa dirección.
+      </p>
+
+      <form [formGroup]="formRegistro" (ngSubmit)="registrar()" novalidate>
+        <div class="row g-3">
+
+          <div class="col-12">
+            <label for="nombreCompleto" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="nombreCompleto" formControlName="nombreCompleto"
+                   placeholder="Nombres y apellidos" [class.is-invalid]="tieneError('nombreCompleto')">
+            <div class="form-text text-danger">
+              @if (tieneError('nombreCompleto')) { {{ mensajes['nombreCompleto'] }} }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="correoRegistro" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="correoRegistro" formControlName="correoRegistro"
+                   placeholder="tucorreo@dominio.com" [class.is-invalid]="tieneError('correoRegistro')">
+            <div class="form-text text-danger">
+              @if (tieneError('correoRegistro')) { {{ mensajes['correoRegistro'] }} }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="telefonoRegistro" class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" id="telefonoRegistro" formControlName="telefonoRegistro"
+                   placeholder="Ej: 3001234567" [class.is-invalid]="tieneError('telefonoRegistro')">
+            <div class="form-text text-danger">
+              @if (tieneError('telefonoRegistro')) { {{ mensajes['telefonoRegistro'] }} }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="tipoDocumento" class="form-label">Tipo de documento</label>
+            <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento"
+                    [class.is-invalid]="tieneError('tipoDocumento')">
+              <option value="" disabled>Seleccione un tipo</option>
+              <option value="cc">Cédula de ciudadanía</option>
+              <option value="ti">Tarjeta de identidad</option>
+              <option value="ce">Cédula de extranjería</option>
+              <option value="pas">Pasaporte</option>
+            </select>
+            <div class="form-text text-danger">
+              @if (tieneError('tipoDocumento')) { {{ mensajes['tipoDocumento'] }} }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="numeroDocumento" class="form-label">Número de documento</label>
+            <input type="text" class="form-control" id="numeroDocumento" formControlName="numeroDocumento"
+                   placeholder="Número de documento" [class.is-invalid]="tieneError('numeroDocumento')">
+            <div class="form-text text-danger">
+              @if (tieneError('numeroDocumento')) { {{ mensajes['numeroDocumento'] }} }
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento"
+                   [class.is-invalid]="tieneError('fechaNacimiento')">
+            <div class="form-text text-danger">
+              @if (tieneError('fechaNacimiento')) { {{ mensajes['fechaNacimiento'] }} }
+            </div>
+          </div>
+
+          <div class="col-12">
+            <span class="form-label d-block">Género</span>
+            <div class="d-flex flex-wrap gap-3">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="generoF" value="femenino" formControlName="generoRegistro">
+                <label class="form-check-label" for="generoF">Femenino</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="generoM" value="masculino" formControlName="generoRegistro">
+                <label class="form-check-label" for="generoM">Masculino</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="generoO" value="otro" formControlName="generoRegistro">
+                <label class="form-check-label" for="generoO">Otro</label>
+              </div>
+            </div>
+            <div class="form-text text-danger">
+              @if (tieneError('generoRegistro')) { {{ mensajes['generoRegistro'] }} }
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="aceptaTerminos" formControlName="aceptaTerminos"
+                     [class.is-invalid]="tieneError('aceptaTerminos')">
+              <label class="form-check-label" for="aceptaTerminos">
+                Acepto los términos, condiciones y la política de tratamiento de datos.
+              </label>
+            </div>
+            <div class="form-text text-danger">
+              @if (tieneError('aceptaTerminos')) { {{ mensajes['aceptaTerminos'] }} }
+            </div>
+          </div>
+
+          <div class="col-12 d-flex justify-content-start mt-2">
+            <button type="submit" class="btn btn-primary" id="btnRegistrar">Registrarme</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENSAJE DE BIENVENIDA ===================== -->
+<div #modalBienvenida class="modal fade" id="modalBienvenida" tabindex="-1" aria-labelledby="tituloBienvenida"
+     aria-hidden="true" (hidden.bs.modal)="alCerrarBienvenida()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bienvenida-contenido">
+      <div class="modal-body text-center">
+        <span class="bienvenida-icono" aria-hidden="true"><i class="bi bi-flower1"></i></span>
+        <h2 class="bienvenida-titulo" id="tituloBienvenida">¡Bienvenid&#64; a <span class="text-nowrap">Clínica Brote!</span></h2>
+        <p class="bienvenida-texto">
+          {{ primerNombre() }}, te enviamos un enlace de verificación a
+          <strong>{{ correoBienvenida() }}</strong> para confirmar tu registro.
+        </p>
+        <button type="button" class="btn btn-promo" data-bs-dismiss="modal">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>

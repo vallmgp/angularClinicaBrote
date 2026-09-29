@@ -1,0 +1,45 @@
+<section id="promociones" class="promo-section">
+  <h2 class="visually-hidden">Promociones del mes</h2>
+
+  <div #carrusel id="carruselPromos" class="carousel slide carousel-fade"
+       (slide.bs.carousel)="alCambiarSlide($event)">
+    <div class="carousel-indicators">
+      @for (promo of promociones; track promo.titulo; let i = $index) {
+        <button type="button" data-bs-target="#carruselPromos" [attr.data-bs-slide-to]="i"
+                [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null"
+                [attr.aria-label]="'Promoción ' + (i + 1) + ': ' + promo.titulo.toLowerCase()"></button>
+      }
+    </div>
+
+    <div class="carousel-inner">
+      @for (promo of promociones; track promo.titulo; let i = $index) {
+        <div class="carousel-item" [class.active]="i === 0">
+          <div class="promo-slide" [class]="promo.clase"
+               [style.background-image]="'url(' + promo.imagen + ')'"
+               role="img" [attr.aria-label]="promo.descripcionFoto"></div>
+          <div class="promo-velo" aria-hidden="true"></div>
+          <div class="container promo-contenido"
+               [class.texto-entra]="i === slideActual()"
+               [class.texto-sale]="i === slideAnterior() && i !== slideActual()"
+               [class.hacia-atras]="!avanzando()">
+            <p class="promo-antetitulo">{{ promo.antetitulo }}</p>
+            <h3 class="promo-titulo">{{ promo.titulo }}</h3>
+            <p class="promo-texto">
+              {{ promo.textoAntes }}<span class="promo-resalta">{{ promo.resaltado }}</span>{{ promo.textoDespues }}
+            </p>
+            <a [href]="promo.enlace" class="btn btn-promo">{{ promo.boton }}</a>
+          </div>
+        </div>
+      }
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carruselPromos" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carruselPromos" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+.site-header{
+  background:var(--verde-05);
+  border-bottom:1px solid var(--verde-20);
+}
+.brand-mark{
+  width:44px; height:44px;
+  border-radius:60% 40% 55% 45% / 55% 45% 55% 45%;
+  background:linear-gradient(155deg, var(--verde-oscuro), #4D8863);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--verde-05);
+  font-size:1.3rem;
+  flex:none;
+}
+.brand-name{
+  font-family:'Manrope', serif;
+  font-weight:600;
+  font-size:1.3rem;
+  color:var(--verde-oscuro-2);
+  line-height:1.1;
+}
+.brand-tagline{
+  font-size:.78rem;
+  color:#4B6A53;
+}
+.social-row a{
+  width:34px; height:34px;
+  border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:var(--verde-10);
+  color:var(--verde-oscuro-2);
+  transition:background .15s ease, color .15s ease, transform .15s ease;
+}
+.social-row a:hover{
+  background:var(--rosa-30);
+  color:#5A2740;
+  transform:translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .social-row a{ transition:none; }
+}

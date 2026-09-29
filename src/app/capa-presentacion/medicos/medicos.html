@@ -1,0 +1,50 @@
+<section id="medicos" class="bg-verde-05 py-5">
+  <div class="container py-4">
+    <p class="eyebrow text-uppercase mb-1">Nuestro equipo</p>
+    <h2 class="mb-4">Médicos y especialidades</h2>
+
+    <div class="row g-4">
+      <!-- Barra lateral de especialidades -->
+      <div class="col-12 col-sm-2 col-md-4 barra-especialidades">
+        <h3 class="h6 text-uppercase text-verde-oscuro mb-2">Especialidades</h3>
+        <div class="list-group especialidad-lista mb-3">
+          @for (esp of especialidades; track esp.filtro) {
+            <button type="button" class="list-group-item list-group-item-action"
+                    [class.active]="filtro() === esp.filtro"
+                    [attr.aria-pressed]="filtro() === esp.filtro"
+                    (click)="seleccionar(esp.filtro)">{{ esp.nombre }}</button>
+          }
+        </div>
+        <p class="small text-verde-oscuro mb-3">Entre otras especialidades como Odontología estética y Cardiología.</p>
+        <p class="especialidad-desc p-3 mb-0">{{ descripcion() }}</p>
+      </div>
+
+      <!-- Cartas de médicos -->
+      <div class="col-12 col-sm-10 col-md-8">
+        <div class="row g-3">
+          @for (medico of medicosVisibles(); track medico.nombre) {
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card card-medico border">
+                <img [src]="medico.imagen" class="avatar-medico img-fluid"
+                     [alt]="medico.nombre + ', especialista en ' + medico.especialidad">
+                <div class="card-body">
+                  <span class="badge badge-especialidad mb-2">
+                    <i class="bi bi-patch-check-fill" aria-hidden="true"></i> {{ medico.etiqueta }}
+                  </span>
+                  <h4 class="h6 mb-1">{{ medico.nombre }}</h4>
+                  <p class="small mb-2">{{ medico.frase }}</p>
+                  <a href="#registro" class="btn btn-sm btn-primary">
+                    <i class="bi bi-calendar-heart" aria-hidden="true"></i> Agendar cita
+                  </a>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        @if (medicosVisibles().length === 0) {
+          <p class="small text-muted mt-3 mb-0">No tenemos médicos registrados en esta especialidad todavía.</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>

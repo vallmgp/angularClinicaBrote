@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Header } from './capa-presentacion/header/header';
+import { Navbar } from './capa-presentacion/navbar/navbar';
+import { Carrusel } from './capa-presentacion/carrusel/carrusel';
+import { Medicos } from './capa-presentacion/medicos/medicos';
+import { Registro } from './capa-presentacion/registro/registro';
+import { Footer } from './capa-presentacion/footer/footer';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  imports: [Header, Navbar, Carrusel, Medicos, Registro, Footer],
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('clinicaBrote');
-}
+export class App {}

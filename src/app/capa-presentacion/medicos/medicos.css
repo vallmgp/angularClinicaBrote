@@ -1,0 +1,105 @@
+.especialidad-lista .list-group-item{
+  border:none;
+  border-left:3px solid transparent;
+  background:transparent;
+  font-weight:600;
+  color:var(--verde-oscuro-2);
+  padding:.55rem .75rem;
+}
+.especialidad-lista .list-group-item:hover{
+  background:var(--rosa-10);
+}
+.especialidad-lista .list-group-item.active{
+  background:var(--rosa-10);
+  border-left-color:var(--rosa-30);
+  color:#7A3255;
+}
+.especialidad-desc{
+  background:var(--crema);
+  border:1px dashed var(--verde-20);
+  border-radius:.8rem;
+  font-size:.88rem;
+  color:#41594A;
+}
+
+/* La tarjeta usa la clase "border" de Bootstrap; aquí solo se le da
+   el grosor y el color verde de la marca (Bootstrap usa !important). */
+.card-medico.border{
+  border:1.5px solid var(--verde-20) !important;
+}
+.card-medico{
+  background:var(--crema);
+  border-radius:1.1rem;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease;
+  height:100%;
+}
+.card-medico:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 28px -18px rgba(46,83,57,.45);
+}
+/* El botón "Agendar cita" queda siempre al fondo de la tarjeta,
+   aunque la frase del médico sea más corta que las demás */
+.card-medico .card-body{
+  display:flex;
+  flex-direction:column;
+}
+.card-medico .card-body .btn{
+  margin-top:auto;
+  align-self:flex-start; /* el botón conserva su tamaño, no se estira */
+}
+.avatar-medico{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  background:linear-gradient(135deg, var(--verde-20), var(--rosa-10));
+}
+.badge-especialidad{
+  align-self:flex-start; /* la insignia conserva su tamaño, no se estira */
+  background:var(--rosa-10);
+  color:#7A3255;
+  font-weight:700;
+  font-size:.7rem;
+}
+
+/* Las insignias largas bajan de línea en vez de cortarse */
+.badge-especialidad{
+  white-space:normal;
+  text-align:left;
+  line-height:1.3;
+}
+.card-medico .btn{
+  white-space:nowrap;
+}
+
+/* Pantallas medianas (768px a 991px): las tarjetas son angostas (3 por fila) */
+@media (min-width: 768px) and (max-width: 991.98px){
+  .card-medico .btn{
+    font-size:.78rem;
+    padding-left:.45rem;
+    padding-right:.45rem;
+  }
+}
+
+/* Pantallas pequeñas (576px a 767px): la barra lateral solo tiene
+   2 de 12 columnas, así que se achica la letra y las palabras largas
+   se dividen para que no se corten */
+@media (min-width: 576px) and (max-width: 767.98px){
+  .especialidad-lista .list-group-item,
+  .especialidad-desc,
+  .barra-especialidades .small{
+    font-size:.72rem;
+    padding-left:.4rem;
+    padding-right:.3rem;
+    hyphens:auto;
+    overflow-wrap:anywhere;
+  }
+  .barra-especialidades h3{
+    font-size:.7rem;
+    overflow-wrap:anywhere;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .card-medico{ transition:none; }
+}
